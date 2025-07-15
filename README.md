@@ -1,5 +1,4 @@
 
-````markdown
 # APTScholar
 
 **APTScholar** is a decentralized platform designed for transparent and automated scholarship distribution, leveraging the security and reliability of the Aptos blockchain. By eliminating intermediaries and embedding eligibility and disbursement logic directly into smart contracts, APTScholar offers an efficient, trustless, and verifiable system for managing scholarships at scale.
