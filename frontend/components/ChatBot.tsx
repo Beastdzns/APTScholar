@@ -14,7 +14,7 @@ const ChatBot = () => {
         setAIText([]);
         try {
             setLoading(true);
-            const genAI = new GoogleGenerativeAI("AIzaSyD8ImShpvzNceoEKv4DWJPWJ4oRJoq81mc");
+            const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
             const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     
             const result = await model.generateContent("You are a chatbot for an website for scholarship management. You have to help people to learn about your platform and how to use it. You can ask them questions about the platform, its features, or how to apply for scholarships. Your goal is to make them feel comfortable and confident using your platform. Provide solution to their problem in as minimum word as possible. Here is a prompt: "+aiPrompt);
