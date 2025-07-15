@@ -7,7 +7,141 @@
 
 ## Overview
 
-APTScholar introduces a fully decentralized infrastructure for scholarship application, verification, and fund disbursement. Built using Move smart contracts on the Aptos blockchain, the platform ensures that each transaction—from application submission to final payment—is permanently recorded, auditable, and resistant to tampering.
+APTScholar introduces a fully decentralized infrastructure for scholarship application, verification, and fund disbursement. Built using Move smart contracts on the Aptos blockchain, the platform ensures that each transaction—from application submission to final payment—is permanently# APTScholar: Revolutionizing Scholarship Distribution with Decentralization
+
+-----
+
+## 🚀 Overview
+
+Welcome to **APTScholar**, a groundbreaking decentralized platform that's transforming how scholarships are managed and distributed. Built on the robust **Aptos blockchain**, APTScholar is designed for ultimate transparency and automation, ensuring every scholarship reaches its rightful recipient without intermediaries. By embedding eligibility and disbursement logic directly into **smart contracts**, we're creating an efficient, trustless, and fully verifiable system for scholarships at scale.
+
+Imagine a world where every step, from application to payment, is permanently recorded, auditable, and resistant to tampering. That's the power of APTScholar\!
+
+-----
+
+## ✨ Key Features
+
+Prepare to be amazed by what APTScholar brings to the table:
+
+  * **🌐 Decentralized Application Workflow**: Say goodbye to centralized bottlenecks\! All application data is processed and validated through cutting-edge on-chain logic.
+  * **🤖 Automated Disbursement**: Funds aren't just sent; they're unleashed automatically via smart contracts the moment eligibility conditions are met. No delays, no manual errors.
+  * **🔍 Transparent & Verifiable Records**: Every single transaction is a public record, cryptographically secured on the Aptos blockchain. See for yourself\!
+  * **🧠 AI-Powered Assistance**: Got questions? Our integrated chatbot, powered by **Langchain + Mistral**, is your personal guide, offering instant support, answering queries, and enhancing your experience.
+  * **🔒 Secure File Management**: Your sensitive documents are safe with us\! Applicant files are handled through decentralized storage, ensuring data integrity and constant availability.
+
+-----
+
+## 🏗️ Architecture: The Engine Behind APTScholar
+
+APTScholar is a marvel of modern decentralized engineering, blending the best of blockchain and web technologies.
+
+### Blockchain Layer: Aptos
+
+At the heart of APTScholar lies the **Aptos blockchain**, providing a scalable, low-latency foundation for all our core logic and data integrity.
+
+  * **Smart Contracts**: Crafted in **Move**, these powerful smart contracts are the digital guardians enforcing all the rules for application handling, eligibility verification, and seamless fund transfers.
+  * **Deployed Contract**: Witness our deployed contract in action on the Aptos Testnet\!
+      * **Address**: `0x47f9407af53e1e236bc95b74c34509e169ddb5309bed8202c07b294a36803d1f`
+      * **Explorer**: [Aptos Testnet - View Contract](https://explorer.aptoslabs.com/txn/6807947204?network=testnet)
+
+### Frontend: React.js
+
+Our user-friendly web interface, built with **React.js**, offers:
+
+  * A stunning and responsive application portal for all aspiring scholars.
+  * Intuitive administrative tools for effortlessly reviewing and managing applications.
+  * Real-time blockchain transaction feedback and smooth interaction.
+
+### Backend: Node.js
+
+Our robust **Node.js** services act as the intelligent intermediary, handling:
+
+  * Seamless management of decentralized file access.
+  * Intelligent data preparation for smart contract transactions.
+  * Serving up essential API endpoints for dynamic frontend interaction.
+
+### Chatbot: Langchain + Mistral
+
+Meet your personal scholarship assistant\! Our conversational chatbot, powered by **Langchain** and cutting-edge **Mistral** models, is here to:
+
+  * Clearly explain the application process.
+  * Help you check eligibility conditions with ease.
+  * Provide real-time feedback and smart suggestions.
+
+-----
+
+## 🛠️ Technology Stack
+
+We've harnessed the best technologies to build APTScholar:
+
+| Component         | Technology                     |
+| :---------------- | :----------------------------- |
+| Smart Contracts   | Move (on Aptos)                |
+| Blockchain Layer  | Aptos Blockchain               |
+| Frontend Interface| React.js                       |
+| Backend Services  | Node.js                        |
+| Blockchain SDKs   | Aptos SDK, Web3.js             |
+| Chatbot Engine    | Langchain + Mistral            |
+| File Storage      | Decentralized (IPFS-compatible)|
+
+-----
+
+## 🚀 Getting Started: Dive into APTScholar\!
+
+Ready to explore APTScholar yourself? Follow these simple steps to run it locally for development or testing.
+
+### 1\. Clone the Repository
+
+Get started by grabbing our code\!
+
+```bash
+git clone https://github.com/0PrashantYadav0/DeFi-Scholarship.git
+cd DeFi-Scholarship
+```
+
+### 2\. Install Project Dependencies
+
+Next, let's get all the necessary packages for both the frontend and backend.
+
+```bash
+npm install
+```
+
+### 3\. Start the Application
+
+Time to bring APTScholar to life\!
+
+```bash
+npm start
+```
+
+This command will launch the development server, typically accessible at `http://localhost:3000`. Get ready to experience decentralized scholarships firsthand\!
+
+-----
+
+## 💡 Platform Usage: Your Journey with APTScholar
+
+Whether you're an aspiring scholar or a diligent administrator, APTScholar offers a streamlined and transparent experience.
+
+### Applicant Workflow
+
+For students seeking scholarships, the journey is intuitive and empowering:
+
+  * **Submitting Applications**: Easily submit scholarship applications through our secure and intuitive frontend portal.
+  * **Document Uploads**: Upload all your required documents using our decentralized and highly secure file storage system.
+  * **AI-Powered Guidance**: Receive real-time assistance from our integrated AI chatbot, guiding you every step of the way.
+  * **Tracking Progress**: Keep an eye on your application status and progress directly through the user-friendly interface.
+  * **Automated Funding**: Once approved, watch scholarship funds arrive automatically via smart contracts executed seamlessly on the Aptos blockchain.
+
+### Administrator Workflow
+
+For administrators overseeing the scholarship process, efficiency and transparency are key:
+
+  * **Dashboard Access**: Access a comprehensive administrative dashboard to effortlessly manage incoming applications.
+  * **Review & Verify**: Review applicant data and meticulously verify all uploaded documentation with ease.
+  * **Approve or Reject**: Make informed decisions by approving or rejecting applications based on predefined eligibility criteria.
+  * **Fund Disbursement**: Execute fund disbursement directly through interaction with our robust Aptos-based smart contracts.
+  * **Transparent Auditing**: Ensure all actions are transparently recorded on-chain, providing unparalleled auditability and accountability. recorded, auditable, and resistant to tampering.
 
 ---
 
@@ -83,57 +217,55 @@ The platform includes a conversational assistant integrated with Langchain and p
 
 ---
 
-## Installation
+## Getting Started
 
-To run the project locally:
+To run APTScholar locally for development or testing, follow the steps below.
 
-1. Clone the repository:
+### 1. Clone the Repository
 
-   ```bash
-   git clone https://github.com/0PrashantYadav0/DeFi-Scholarship.git
-   cd DeFi-Scholarship
-````
+```bash
+git clone https://github.com/0PrashantYadav0/DeFi-Scholarship.git
+cd DeFi-Scholarship
+2. Install Project Dependencies
+Install the required packages for both the frontend and backend:
 
-2. Install dependencies:
+bash
+Copy
+Edit
+npm install
+3. Start the Application
+To launch the development server:
 
-   ```bash
-   npm install
-   ```
+bash
+Copy
+Edit
+npm start
+This will run the application locally on the default port, typically http://localhost:3000.
 
-3. Start the development server:
-
-   ```bash
-   npm start
-   ```
-
----
-
-## Usage
-
-### For Applicants
-
-* Fill out the application form through the web interface
-* Upload supporting documents
-* Interact with the chatbot for guidance
-* Receive status updates as your application progresses
-* Approved funds are automatically disbursed via the blockchain
-
-### For Administrators
-
-* Access the admin dashboard to view pending applications
-* Review applicant documents and eligibility data
-* Approve or reject based on preset criteria
-* All approval actions are recorded and executed on-chain
+Certainly. Below is the **cleaned and professionally formatted version** of the **"Platform Usage"** section, presented as a standalone explanation — without any "how to run" or development instructions:
 
 ---
 
-## License
+## Platform Usage
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+### Applicant Workflow
+
+Applicants interact with the APTScholar platform through a secure and intuitive web interface. The process includes:
+
+* Submitting scholarship applications via the frontend portal.
+* Uploading required documents using decentralized and secure file storage.
+* Receiving real-time assistance from an integrated AI-powered chatbot throughout the application process.
+* Tracking application status and progress directly through the interface.
+* Upon approval, receiving scholarship funds automatically via smart contracts executed on the Aptos blockchain.
+
+### Administrator Workflow
+
+Administrators are responsible for overseeing the application and selection process. Their responsibilities include:
+
+* Accessing the administrative dashboard to manage incoming applications.
+* Reviewing applicant data and verifying uploaded documentation.
+* Approving or rejecting applications based on predefined eligibility criteria.
+* Executing fund disbursement through interaction with Aptos-based smart contracts.
+* Ensuring all actions are transparently recorded on-chain for auditability and accountability.
 
 ---
-
-**APTScholar** — Secure, Transparent, and Automated Scholarship Distribution on the Aptos Blockchain.
-
-```
-
