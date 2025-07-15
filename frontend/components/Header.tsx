@@ -52,7 +52,7 @@ export function Header() {
               <Link
                 key={index}
                 to={link}
-                className="rounded-md px-3 py-2 text-slate-600 transition-colors duration-100 ease-linear hover:bg-gray-100 hover:text-gray-900 md:hover:bg-gray-700 md:hover:text-white"
+                className="rounded-md text-[18px] px-3 py-2 text-slate-600 transition-colors duration-100 ease-linear hover:bg-gray-100 hover:text-gray-900 md:hover:bg-gray-700 md:hover:text-white"
                 onClick={() => setShowNav(false)}
               >
                 {title}

@@ -380,184 +380,283 @@ export function CreateCollection() {
   return (
     <>
       <LaunchpadHeader title="Create Scholarships" />
-      <div className="flex flex-col items-center justify-center px-4 py-2 gap-4 max-w-screen-xl mx-auto">
-        <div className="w-full flex flex-col gap-y-4">
-          <Card>
-            <CardHeader>
-              <CardDescription>Necessary functions to create scholarships only once per account</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col md:flex-row items-start justify-between space-y-4 md:space-y-0 md:space-x-4">
-                <Button variant="init" size="sm" className="text-primary" onClick={initializeBalance}>
-                  Initialize Balance
-                </Button>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Setup Section */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Account Setup</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold">1</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg">Initial Setup</h3>
+                      <CardDescription>One-time setup required for scholarship creation</CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <Button 
+                      variant="init" 
+                      size="sm" 
+                      className="text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md" 
+                      onClick={initializeBalance}
+                    >
+                      Initialize Balance
+                    </Button>
+                    <Button 
+                      variant="init" 
+                      size="sm" 
+                      className="text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md" 
+                      onClick={issueTokens}
+                    >
+                      Issue Tokens
+                    </Button>
+                    <Button 
+                      variant="init" 
+                      size="sm" 
+                      className="text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md" 
+                      onClick={initializeScholarship}
+                    >
+                      Init Scholarship
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
 
-                <Button variant="init" size="sm" className="text-primary" onClick={issueTokens}>
-                  Issue Tokens
-                </Button>
+              <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold">💰</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg">Account Balance</h3>
+                      <CardDescription>Available tokens for scholarship funding</CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between">
+                    {balance !== 0 ? (
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl font-bold text-blue-600">{balance.toLocaleString()}</span>
+                        <span className="text-sm text-gray-500">Tokens</span>
+                      </div>
+                    ) : (
+                      <div className="text-gray-500">Please initialize your balance first</div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
 
-                <Button variant="init" size="sm" className="text-primary" onClick={initializeScholarship}>
-                  Init Scholarship
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Create Scholarship Section */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Create New Scholarship</h2>
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">✏️</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Scholarship Details</h3>
+                    <CardDescription>Fill in the details for your new scholarship</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Form
+                  onFinish={createScholarship}
+                  labelCol={{
+                    span: 6.2,
+                  }}
+                  wrapperCol={{
+                    span: 100,
+                  }}
+                  layout="horizontal"
+                  className="space-y-4"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Form.Item name="name" label="Scholarship Name" rules={[{ required: true }]}>
+                      <Input placeholder="Enter scholarship name" className="rounded-lg" />
+                    </Form.Item>
+                    <Form.Item name="amount_per_applicant" label="Amount Per Applicant" rules={[{ required: true }]}>
+                      <Input placeholder="Enter amount per applicant" className="rounded-lg" />
+                    </Form.Item>
+                    <Form.Item name="total_applicants" label="Total Applicants" rules={[{ required: true }]}>
+                      <Input placeholder="Enter total number of applicants" className="rounded-lg" />
+                    </Form.Item>
+                    <Form.Item name="criteria_gpa" label="Minimum GPA" rules={[{ required: true }]}>
+                      <Input placeholder="Enter minimum GPA requirement" className="rounded-lg" />
+                    </Form.Item>
+                    <Form.Item name="field_of_study" label="Field of Study" rules={[{ required: true }]}>
+                      <Select placeholder="Select field of study" className="rounded-lg">
+                        <Select.Option value="Science">Science</Select.Option>
+                        <Select.Option value="Maths">Maths</Select.Option>
+                        <Select.Option value="Computer">Computer</Select.Option>
+                        <Select.Option value="Sports">Sports</Select.Option>
+                        <Select.Option value="Others">Others</Select.Option>
+                      </Select>
+                    </Form.Item>
+                    <Form.Item name="end_time" label="End Time" rules={[{ required: true }]}>
+                      <DatePicker
+                        showTime={isMobile() ? false : true}
+                        disabledDate={disabledDate}
+                        disabledTime={disabledDateTime}
+                        getPopupContainer={(trigger) => trigger.parentElement || document.body}
+                        popupClassName="max-w-full sm:max-w-lg"
+                        className="w-full rounded-lg"
+                        placeholder="Select end date and time"
+                      />
+                    </Form.Item>
+                  </div>
+                  <Form.Item className="pt-4">
+                    <Button 
+                      variant="submit" 
+                      size="lg" 
+                      className="text-base w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg" 
+                      type="submit"
+                    >
+                      Create Scholarship
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </CardContent>
+            </Card>
+          </div>
+          {/* Your Scholarships Table */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Created Scholarships</h2>
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+              <CardContent className="p-6">
+                <div className="overflow-x-auto">
+                  <Table 
+                    dataSource={createdScholarships} 
+                    rowKey="scholarship_id" 
+                    className="w-full"
+                    pagination={{ pageSize: 10 }}
+                  >
+                    <Column title="ID" dataIndex="scholarship_id" width={80} />
+                    <Column title="Name" dataIndex="name" width={200} />
+                    <Column title="Amt / A" dataIndex="amount_per_applicant" responsive={["lg"]} width={120} />
+                    <Column title="Total A" dataIndex="total_applicants" responsive={["lg"]} width={100} />
+                    <Column title="GPA Req" dataIndex="criteria_gpa" width={100} />
+                    <Column title="Field" dataIndex="field_of_study" responsive={["md"]} width={120} />
+                    <Column
+                      title="Status"
+                      dataIndex="is_open"
+                      render={(is_open: boolean) => (
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          is_open ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          {is_open ? "Open" : "Closed"}
+                        </span>
+                      )}
+                      responsive={["md"]}
+                      width={100}
+                    />
+                    <Column
+                      title="End Time"
+                      dataIndex="end_time"
+                      render={(time: any) => (
+                        <span className="text-sm text-gray-600">
+                          {formatTimestamp(time).toString()}
+                        </span>
+                      )}
+                      responsive={["lg"]}
+                      width={180}
+                    />
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          {/* Management Actions */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">🎯</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Distribute Scholarship</h3>
+                    <CardDescription>Distribute funds to eligible recipients after deadline</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Form
+                  onFinish={distributeScholarship}
+                  layout="vertical"
+                  className="space-y-4"
+                >
+                  <Form.Item name="scholarship_id" label="Scholarship ID" rules={[{ required: true }]}>
+                    <Input placeholder="Enter scholarship ID" className="rounded-lg" />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button 
+                      variant="submit" 
+                      size="lg" 
+                      className="text-base w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg" 
+                      type="submit"
+                    >
+                      Distribute Funds
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <CardDescription>Your Balance for Scholarship Creation</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col md:flex-row items-start justify-between space-y-4 md:space-y-0 md:space-x-4">
-                {balance !== 0 && <div>Tokens: {balance}</div>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <h1>Create Scholarship</h1>
-          <Form
-            onFinish={createScholarship}
-            labelCol={{
-              span: 6.2,
-            }}
-            wrapperCol={{
-              span: 100,
-            }}
-            layout="horizontal"
-            style={{
-              maxWidth: 1000,
-              border: "1px solid #e5e7eb",
-              borderRadius: "0.5rem",
-              padding: "1.7rem",
-            }}
-          >
-            <Form.Item name="name" label="Scholarship Name" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item name="amount_per_applicant" label="Amount Per Applicant" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item name="total_applicants" label="Total Applicants" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item name="criteria_gpa" label="Minimum GPA" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item name="field_of_study" label="Field of Study" rules={[{ required: true }]}>
-              <Select>
-                <Select.Option value="Science">Science</Select.Option>
-                <Select.Option value="Maths">Maths</Select.Option>
-                <Select.Option value="Computer">Computer</Select.Option>
-                <Select.Option value="Sports">Sports</Select.Option>
-                <Select.Option value="Others">Others</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item name="end_time" label="End Time" rules={[{ required: true }]}>
-              <DatePicker
-                showTime={isMobile() ? false : true}
-                disabledDate={disabledDate}
-                disabledTime={disabledDateTime}
-                getPopupContainer={(trigger) => trigger.parentElement || document.body}
-                popupClassName="max-w-full sm:max-w-lg"
-                className="w-full"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button variant="submit" size="lg" className="text-base w-full" type="submit">
-                Create Scholarship
-              </Button>
-            </Form.Item>
-          </Form>
-          <Table dataSource={createdScholarships} rowKey="scholarship_id" className="max-w-screen-xl mx-auto">
-            <Column title="ID" dataIndex="scholarship_id" />
-            <Column title="Name" dataIndex="name" />
-            <Column title="Amt / A" dataIndex="amount_per_applicant" responsive={["lg"]} />
-            <Column title="Total A" dataIndex="total_applicants" responsive={["lg"]} />
-            <Column title="GPA Req" dataIndex="criteria_gpa" />
-            <Column title="Field" dataIndex="field_of_study" responsive={["md"]} />
-            <Column
-              title="Is Open"
-              dataIndex="is_open"
-              render={(is_open: boolean) => (is_open ? "Open" : "Closed")}
-              responsive={["md"]}
-            />
-            <Column
-              title="End Time"
-              dataIndex="end_time"
-              render={(time: any) => formatTimestamp(time).toString()}
-              responsive={["lg"]}
-            />
-          </Table>
-          <Card>
-            <CardHeader>
-              <CardDescription>Distribute Scholarship Funds after time Ended</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form
-                onFinish={distributeScholarship}
-                labelCol={{
-                  span: 6.2,
-                }}
-                wrapperCol={{
-                  span: 100,
-                }}
-                layout="horizontal"
-                style={{
-                  maxWidth: 1000,
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "0.5rem",
-                  padding: "1.7rem",
-                }}
-              >
-                <Form.Item name="scholarship_id" label="Scholarship ID" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-
-                <Form.Item>
-                  <Button variant="submit" size="lg" className="text-base" type="submit">
-                    Distribute
-                  </Button>
-                </Form.Item>
-              </Form>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardDescription>Close Scholarship your funds will get refunded</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form
-                onFinish={emergency_close_scholarship}
-                labelCol={{
-                  span: 6.2,
-                }}
-                wrapperCol={{
-                  span: 100,
-                }}
-                layout="horizontal"
-                style={{
-                  maxWidth: 1000,
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "0.5rem",
-                  padding: "1.7rem",
-                }}
-              >
-                <Form.Item name="scholarship_id" label="Scholarship ID" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-
-                <Form.Item>
-                  <Button variant="submit" size="lg" className="text-base" type="submit">
-                    Close
-                  </Button>
-                </Form.Item>
-              </Form>
-            </CardContent>
-          </Card>
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">⚠️</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Emergency Close</h3>
+                    <CardDescription>Close scholarship early and get refund</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Form
+                  onFinish={emergency_close_scholarship}
+                  layout="vertical"
+                  className="space-y-4"
+                >
+                  <Form.Item name="scholarship_id" label="Scholarship ID" rules={[{ required: true }]}>
+                    <Input placeholder="Enter scholarship ID" className="rounded-lg" />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button 
+                      variant="submit" 
+                      size="lg" 
+                      className="text-base w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg" 
+                      type="submit"
+                    >
+                      Close Scholarship
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-      <Footer className="footer">AptScholar@2025 | All Rights Reserved</Footer>
+      <Footer className="footer bg-gray-800 text-white">
+        <div className="text-center py-4">
+          <span className="text-sm">AptScholar@2025 | All Rights Reserved</span>
+        </div>
+      </Footer>
     </>
   );
 }
