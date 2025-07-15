@@ -5,7 +5,7 @@ import { MODULE_ADDRESS } from "@/constants";
 import { aptosClient } from "@/utils/aptosClient";
 import { InputViewFunctionData } from "@aptos-labs/ts-sdk";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
-import { Form, Input, List, message, Select, Table } from "antd";
+import { Form, Input, message, Select, Table } from "antd";
 import "dotenv/config";
 import { useEffect, useState } from "react";
 const { Column } = Table;
@@ -138,110 +138,179 @@ export function MyCollections() {
   return (
     <>
       <LaunchpadHeader title="Apply for Scholarship" />
-      <div className="flex flex-col items-center justify-center px-4 py-2 gap-4 max-w-screen-xl mx-auto">
-        <div className="w-full flex flex-col gap-y-4">
-          <Card>
-            <CardHeader>
-              <CardDescription>All Available Scholarships on the Platform</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Table dataSource={scholarships} rowKey="scholarship_id" className="max-w-screen-xl mx-auto">
-                <Column title="ID" dataIndex="scholarship_id" />
-                <Column title="Name" dataIndex="name" />
-                <Column
-                  title="Donor"
-                  dataIndex="donor"
-                  render={(donor: string) => donor.substring(0, 6)}
-                  responsive={["lg"]}
-                />
-                <Column title="Amt / A" dataIndex="amount_per_applicant" responsive={["lg"]} />
-                <Column title="Total A" dataIndex="total_applicants" responsive={["lg"]} />
-                <Column title="GPA Req" dataIndex="criteria_gpa" />
-                <Column title="Field" dataIndex="field_of_study" responsive={["md"]} />
-                <Column
-                  title="Is Open"
-                  dataIndex="is_open"
-                  render={(is_open: boolean) => (is_open ? "Open" : "Closed")}
-                  responsive={["md"]}
-                />
-                <Column
-                  title="End Time"
-                  dataIndex="end_time"
-                  render={(time: any) => formatTimestamp(time).toString()}
-                  responsive={["lg"]}
-                />
-              </Table>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardDescription>Apply for Scholarship</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form
-                onFinish={applyScholarship}
-                labelCol={{
-                  span: 3.5,
-                }}
-                wrapperCol={{
-                  span: 100,
-                }}
-                layout="horizontal"
-                style={{
-                  maxWidth: 1000,
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "0.5rem",
-                  padding: "1.7rem",
-                }}
-              >
-                <Form.Item name="scholarship_id" label="Scholarship ID" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="criteria_gpa" label="GPA" rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-                <Form.Item name="field_of_study" label="Field of Study" rules={[{ required: true }]}>
-                  <Select>
-                    <Select.Option value="Science">Science</Select.Option>
-                    <Select.Option value="Maths">Maths</Select.Option>
-                    <Select.Option value="Computer">Computer</Select.Option>
-                    <Select.Option value="Sports">Sports</Select.Option>
-                    <Select.Option value="Others">Others</Select.Option>
-                  </Select>
-                </Form.Item>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Available Scholarships Section */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Available Scholarships</h2>
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">📚</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Scholarship Opportunities</h3>
+                    <CardDescription>Browse all available scholarships on the platform</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="overflow-x-auto">
+                  <Table 
+                    dataSource={scholarships} 
+                    rowKey="scholarship_id" 
+                    className="w-full"
+                    pagination={{ pageSize: 10 }}
+                  >
+                    <Column title="ID" dataIndex="scholarship_id" width={80} />
+                    <Column title="Name" dataIndex="name" width={200} />
+                    <Column
+                      title="Donor"
+                      dataIndex="donor"
+                      render={(donor: string) => (
+                        <span className="text-sm text-gray-600">{donor?.substring(0, 6)}...</span>
+                      )}
+                      responsive={["lg"]}
+                      width={100}
+                    />
+                    <Column title="Amt / A" dataIndex="amount_per_applicant" responsive={["lg"]} width={120} />
+                    <Column title="Total A" dataIndex="total_applicants" responsive={["lg"]} width={100} />
+                    <Column title="GPA Req" dataIndex="criteria_gpa" width={100} />
+                    <Column title="Field" dataIndex="field_of_study" responsive={["md"]} width={120} />
+                    <Column
+                      title="Status"
+                      dataIndex="is_open"
+                      render={(is_open: boolean) => (
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          is_open ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          {is_open ? "Open" : "Closed"}
+                        </span>
+                      )}
+                      responsive={["md"]}
+                      width={100}
+                    />
+                    <Column
+                      title="End Time"
+                      dataIndex="end_time"
+                      render={(time: any) => (
+                        <span className="text-sm text-gray-600">
+                          {formatTimestamp(time).toString()}
+                        </span>
+                      )}
+                      responsive={["lg"]}
+                      width={180}
+                    />
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          {/* Application Form Section */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Apply for Scholarship</h2>
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">📝</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Submit Application</h3>
+                    <CardDescription>Fill out the form to apply for a scholarship</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Form
+                  onFinish={applyScholarship}
+                  layout="vertical"
+                  className="space-y-4"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Form.Item name="scholarship_id" label="Scholarship ID" rules={[{ required: true }]}>
+                      <Input placeholder="Enter scholarship ID" className="rounded-lg" />
+                    </Form.Item>
+                    <Form.Item name="criteria_gpa" label="Your GPA" rules={[{ required: true }]}>
+                      <Input placeholder="Enter your GPA" className="rounded-lg" />
+                    </Form.Item>
+                    <Form.Item name="field_of_study" label="Field of Study" rules={[{ required: true }]}>
+                      <Select placeholder="Select your field of study" className="rounded-lg">
+                        <Select.Option value="Science">Science</Select.Option>
+                        <Select.Option value="Maths">Maths</Select.Option>
+                        <Select.Option value="Computer">Computer</Select.Option>
+                        <Select.Option value="Sports">Sports</Select.Option>
+                        <Select.Option value="Others">Others</Select.Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <Form.Item className="pt-4">
+                    <Button 
+                      variant="submit" 
+                      size="lg" 
+                      className="text-base w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg" 
+                      type="submit"
+                    >
+                      Apply for Scholarship
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </CardContent>
+            </Card>
+          </div>
 
-                <Form.Item>
-                  <Button variant="submit" size="lg" className="text-base" type="submit">
-                    Apply for Scholarship
-                  </Button>
-                </Form.Item>
-              </Form>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardDescription>All Applied Scholarships</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {appliedScholarships && appliedScholarships.length > 0 && (
-                <List
-                  grid={{ gutter: 16, column: 1 }}
-                  dataSource={appliedScholarships}
-                  renderItem={(applicant, i) => (
-                    <List.Item>
-                      <p>
-                        <strong>Scholarship Id:{i}</strong> {applicant.appliedScholarshipIDS}
-                      </p>
-                    </List.Item>
-                  )}
-                />
-              )}
-            </CardContent>
-          </Card>
+          {/* Applied Scholarships Section */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Applications</h2>
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">📋</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Applied Scholarships</h3>
+                    <CardDescription>Track all your scholarship applications</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6">
+                {appliedScholarships && appliedScholarships.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {appliedScholarships.map((applicant, i) => (
+                      <div key={i} className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                            <span className="text-white text-sm font-bold">{i + 1}</span>
+                          </div>
+                          <div>
+                            <p className="font-semibold text-gray-800">Scholarship ID</p>
+                            <p className="text-blue-600 font-medium">{applicant.appliedScholarshipIDS}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-gray-400 text-2xl">📝</span>
+                    </div>
+                    <p className="text-gray-500">No scholarship applications yet</p>
+                    <p className="text-sm text-gray-400">Apply for scholarships to see them here</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-      <Footer className="footer">Scholarship Platform ©2024 | All Rights Reserved</Footer>
+      <Footer className="footer bg-gray-800 text-white">
+        <div className="text-center py-4">
+          <span className="text-sm">AptScholar@2025 | All Rights Reserved</span>
+        </div>
+      </Footer>
     </>
   );
 }

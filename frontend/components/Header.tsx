@@ -1,9 +1,9 @@
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { WalletSelector } from "./WalletSelector";
 import { useState } from "react";
 import ChatBot from "./ChatBot";
-import { Menu, X, MessageCircle, Plus } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 
 const navLinks = [
   { title: 'Create', link: '/create-scholarship' },
