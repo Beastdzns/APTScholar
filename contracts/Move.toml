@@ -4,6 +4,10 @@ version = "1.0.0"
 authors = []
 
 [addresses]
+aptscholar = "0x47f9407af53e1e236bc95b74c34509e169ddb5309bed8202c07b294a36803d1f"
+std = "0x1"
+donor_addrx="0x47f9407af53e1e236bc95b74c34509e169ddb5309bed8202c07b294a36803d1f"
+applicant_addrx="0x47f9407af53e1e236bc95b74c34509e169ddb5309bed8202c07b294a36803d1f"
 
 [dev-addresses]
 

@@ -619,7 +619,7 @@ module aptscholar::ScholarshipPlatform {
             };
         };
 
-        return count;
+        return count
     }
     
 }
