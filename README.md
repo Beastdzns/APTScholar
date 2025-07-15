@@ -41,8 +41,16 @@ At the heart of APTScholar lies the **Aptos blockchain**, providing a scalable, 
 
   * **Smart Contracts**: Crafted in **Move**, these powerful smart contracts are the digital guardians enforcing all the rules for application handling, eligibility verification, and seamless fund transfers.
   * **Deployed Contract**: Witness our deployed contract in action on the Aptos Testnet\!
-      * **Address**: `0x47f9407af53e1e236bc95b74c34509e169ddb5309bed8202c07b294a36803d1f`
-      * **Explorer**: [Aptos Testnet - View Contract](https://explorer.aptoslabs.com/txn/6807947204?network=testnet)
+ ---
+
+### 🌐 Contract Details
+
+| Detail                | Value                                                                                                        |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------- |
+| **Contract Address** | `0x47f9407af53e1e236bc95b74c34509e169ddb5309bed8202c07b294a36803d1f`                                         |
+| **View on Explorer** | [Aptos Testnet - View Contract](https://explorer.aptoslabs.com/txn/6807947204?network=testnet)                 |
+
+---
 
 ### Frontend: React.js
 
