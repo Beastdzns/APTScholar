@@ -31,7 +31,7 @@ export function Mint() {
             scene="https://prod.spline.design/901TS4Hm93yt3T9V/scene.splinecode"
           />
         </div>
-        <Footer className="footer relative bottom-0">Scholarship Platform ©2024 | All Rights Reserved</Footer>
+        <Footer className="footer relative bottom-0">APTScholar©2025 | All Rights Reserved</Footer>
       </div>
     </>
   );
