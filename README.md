@@ -103,7 +103,7 @@ Ready to explore APTScholar yourself? Follow these simple steps to run it locall
 Get started by grabbing our code\!
 
 ```bash
-git clone https://github.com/0PrashantYadav0/DeFi-Scholarship.git
+git clone https://github.com/yourusername/DeFi-Scholarship.git
 cd DeFi-Scholarship
 ```
 
