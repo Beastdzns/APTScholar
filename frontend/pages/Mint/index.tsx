@@ -22,8 +22,8 @@ export function Mint() {
       <Header />
       <div style={{ overflow: "hidden" }} className="overflow-hidden">
         <div className="absolute text-center w-full flex flex-col justify-center">
-          <h1 className="text-4xl text-center text-white mt-14 font-mono font-semibold ">Welcome to the Scholarship Platform</h1>
-          <p className="text-center mt-5 text-white text-lg font-mono">Create and apply for scholarships</p>
+          <h1 className="text-4xl text-center mt-14 font-mono font-semibold ">Welcome to the Scholarship Platform</h1>
+          <p className="text-center mt-5 text-lg font-mono">Create and apply for scholarships</p>
         </div>
         <div className='h-[85vh] w-full -z-10'>
           <Spline
