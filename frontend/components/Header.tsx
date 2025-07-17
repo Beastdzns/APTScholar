@@ -1,94 +1,163 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { WalletSelector } from "./WalletSelector";
 import { useState } from "react";
 import ChatBot from "./ChatBot";
-import { Menu, X, MessageCircle } from "lucide-react";
-
-const navLinks = [
-  { title: 'Create', link: '/create-scholarship' },
-  { title: 'Apply', link: '/apply' },
-]
+import { MessageCircle } from "lucide-react";
+import {
+  Navbar,
+  NavBody,
+  MobileNav,
+  MobileNavHeader,
+  MobileNavToggle,
+  MobileNavMenu,
+} from "./ui/resizable-navbar";
 
 export function Header() {
   const [chatBot, setChatBot] = useState<boolean>(false);
-  const [showNav, setShowNav] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleChatClick = () => {
     setChatBot(!chatBot);
   };
 
-  const handleShowNav = () => {
-    setShowNav(!showNav);
-  };
+  const navItems = [
+    {
+      name: "Create",
+      link: "/create-scholarship",
+    },
+    {
+      name: "Apply",
+      link: "/apply",
+    },
+  ];
 
   return (
-    <nav className="relative z-20 backdrop-blur-lg bg-white/80">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8 h-16">
-        <div className="flex items-center gap-4 sm:gap-10">
-          {/* hamburger menu or cross icon */}
-          <button onClick={handleShowNav} aria-label="Toggle Menu" className="md:hidden">
-            {showNav ? (
-              <X color="#202020" strokeWidth={2} size={24} />
-            ) : (
-              <Menu color="#202020" strokeWidth={2} size={24} />
-            )}
-          </button>
-          
-          {/* logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <img
-              src="/logo.png"
-              className="h-26 w-auto object-contain max-h-28"
-              alt="Logo"
-            />
+    <div className="relative w-full">
+      <div className="relative z-50">
+        <Navbar>
+          {/* Desktop Navigation */}
+          <NavBody>
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="relative">
+              <img
+                src="/logo.png"
+                className="h-10 w-auto object-contain max-h-10 transition-transform duration-300 group-hover:scale-105"
+                alt="Logo"
+              />
+              <div className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 rounded-lg transition-opacity duration-300"></div>
+            </div>
+            <span className="hidden sm:block text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              AptScholar
+            </span>
           </Link>
           
-          {/* nav links */}
-          <div
-            className={`absolute right-0 left-0 -z-10 flex w-full flex-col gap-3 bg-white/95 backdrop-blur-lg p-3 shadow transition-all duration-300 ease-in-out md:relative md:top-auto md:right-auto md:left-0 md:z-auto md:flex-row md:shadow-none md:bg-transparent ${showNav ? 'top-[64px]' : 'top-[-165px]'}`}
-          >
-            {navLinks.map(({ title, link }, index) => (
+          {/* Navigation Items */}
+          <div className="hidden lg:flex items-center justify-center space-x-1">
+            {navItems.map((item, idx) => (
               <Link
-                key={index}
-                to={link}
-                className="rounded-md text-[18px] px-3 py-2 text-slate-600 transition-colors duration-100 ease-linear hover:bg-gray-100 hover:text-gray-900 md:hover:bg-gray-700 md:hover:text-white"
-                onClick={() => setShowNav(false)}
+                key={`nav-link-${idx}`}
+                to={item.link}
+                className="relative px-6 py-3 text-gray-700 font-medium hover:text-blue-600 transition-all duration-300 rounded-xl hover:bg-blue-50 group"
               >
-                {title}
+                <span className="relative z-10">{item.name}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300"></div>
               </Link>
             ))}
-            
-            {/* Mobile ChatBot button */}
-            <button
+          </div>
+          
+          {/* Right side actions */}
+          <div className="flex items-center gap-3">
+            {/* Desktop ChatBot button */}
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={handleChatClick}
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-slate-600 transition-colors duration-100 ease-linear hover:bg-gray-100 hover:text-gray-900 md:hidden"
+              className="hidden md:flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md"
             >
               <MessageCircle size={18} />
-              ChatBot
-            </button>
+              <span className="font-medium">ChatBot</span>
+            </Button>
+            
+            {/* Desktop Wallet Selector */}
+            <div className="relative">
+              <WalletSelector />
+            </div>
           </div>
-        </div>
-        
-        {/* Right side actions */}
-        <div className="flex items-center gap-2">
-          {/* Desktop ChatBot button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleChatClick}
-            className="hidden md:flex items-center gap-2 text-slate-600 hover:text-gray-900"
+        </NavBody>
+
+        {/* Mobile Navigation */}
+        <MobileNav>
+          <MobileNavHeader>
+            {/* Mobile Logo */}
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="relative">
+                <img
+                  src="/logo.png"
+                  className="h-8 w-auto object-contain max-h-8 transition-transform duration-300 group-hover:scale-105"
+                  alt="Logo"
+                />
+                <div className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 rounded-lg transition-opacity duration-300"></div>
+              </div>
+              <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                AptScholar
+              </span>
+            </Link>
+            
+            <MobileNavToggle
+              isOpen={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            />
+          </MobileNavHeader>
+
+          <MobileNavMenu
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
           >
-            <MessageCircle size={18} />
-            ChatBot
-          </Button>
-          
-          <WalletSelector />
-        </div>
+            <div className="space-y-2">
+              {navItems.map((item, idx) => (
+                <Link
+                  key={`mobile-link-${idx}`}
+                  to={item.link}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 text-gray-700 font-medium hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="text-lg">{item.name}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            
+            <div className="flex w-full flex-col gap-3 mt-6 pt-6 border-t border-gray-200">
+              {/* Mobile ChatBot button */}
+              <Button
+                onClick={() => {
+                  handleChatClick();
+                  setIsMobileMenuOpen(false);
+                }}
+                variant="ghost"
+                className="w-full flex items-center gap-3 justify-center py-3 text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 transition-all duration-300 rounded-xl"
+              >
+                <MessageCircle size={20} />
+                <span className="font-medium">ChatBot</span>
+              </Button>
+              
+              {/* Mobile Wallet Selector */}
+              <div className="w-full">
+                <WalletSelector />
+              </div>
+            </div>
+          </MobileNavMenu>
+        </MobileNav>
+        </Navbar>
       </div>
       
       {/* ChatBot component */}
       {chatBot && <ChatBot />}
-    </nav>
+    </div>
   );
 }
