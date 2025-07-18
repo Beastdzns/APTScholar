@@ -68,7 +68,7 @@ Our robust **Node.js** services act as the intelligent intermediary, handling:
   * Intelligent data preparation for smart contract transactions.
   * Serving up essential API endpoints for dynamic frontend interaction.
 
-### Chatbot: Langchain + Mistral
+### Chatbot: Langchain + Mistral +gemini
 
 Meet your personal scholarship assistant\! Our conversational chatbot, powered by **Langchain** and cutting-edge **Mistral** models, is here to:
 
@@ -89,7 +89,7 @@ We've harnessed the best technologies to build APTScholar:
 | Frontend Interface| React.js                       |
 | Backend Services  | Node.js                        |
 | Blockchain SDKs   | Aptos SDK, Web3.js             |
-| Chatbot Engine    | Langchain + Mistral            |
+| Chatbot Engine    | Langchain + Mistral+ gemini     |
 | File Storage      | Decentralized (IPFS-compatible)|
 
 -----
@@ -103,7 +103,7 @@ Ready to explore APTScholar yourself? Follow these simple steps to run it locall
 Get started by grabbing our code\!
 
 ```bash
-git clone https://github.com/yourusername/DeFi-Scholarship.git
+git clone https://github.com/yourusername/APTScholar.git
 cd DeFi-Scholarship
 ```
 
